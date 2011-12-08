@@ -1,0 +1,29 @@
+function A = jakobian(f,x,h)
+        n = length(x)
+        A = []
+        for j =[1;n]
+                x2 = x
+                x2(j) += h
+                df = (f(x2) - f(x))/h
+                A = [A,df]
+        end
+end
+
+function ciag = newton(f, x0, h, n)
+ciag = [x0 - inv(jakobian(f, x0,h))*f(x0)]
+for i = [2:n]
+ciag = [ciag; ciag(i-1) - inv(jakobian(f,ciag(i-1),h))*f(ciag(i-1))]
+end
+end
+
+function ret = f1(x,y)
+ret = [(x-1)*2, y]
+end
+
+f = @(x) [x(1)+2, x(2)*2] 
+f2 = @(x) [(x(1)-1)*(x(2)*x(2) + 1); (x(2)-2)*(x(1)^4+2)]
+f2x0 = [3,3]
+
+#jakobian(f, 0, 0.05)
+
+newton(f2, f2x0, 0.1, 10)
