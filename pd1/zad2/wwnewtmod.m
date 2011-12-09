@@ -8,7 +8,7 @@ function [x, lambda, ok] = wwnewtmod(f, x0, h, res, iter)
   lamwyk = 0;
   lambda =[];
   k=0
-  while k <= iter && norm(f(x(end))) <= res, 
+  while k <= iter && norm(f(x(end))) > res, 
     MJ = jakobian(f, x(end), h);
     MJ = inv(MJ);
     fxk = f(x(end));
