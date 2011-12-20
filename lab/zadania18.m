@@ -13,7 +13,6 @@ function coeff = bestFitRank(x, y, rank)
   coeff = A\y
 end;
 
-
 fancydiag = @(x) diag(ones(x,1)*2) + diag(ones(x-1,1)*-1,1) + diag(ones(x-1,1)*-1,-1);
 
 function A = sparsediag(n)
